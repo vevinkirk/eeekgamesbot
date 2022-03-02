@@ -1,0 +1,22 @@
+{
+  "name": "eeekgamesbot",
+  "version": "1.0.0",
+  "description": "Eeek games discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vevinkirk/eeekgamesbot.git"
+  },
+  "author": "Virk, Becker, Corn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vevinkirk/eeekgamesbot/issues"
+  },
+  "homepage": "https://github.com/vevinkirk/eeekgamesbot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  }
+}
