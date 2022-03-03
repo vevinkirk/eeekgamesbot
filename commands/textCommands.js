@@ -14,7 +14,11 @@ const tanner = (msg) => {
 }
 
 const mastery = (msg, args) => {
-    const summonerName = args.shift();
+    //remove white space and comma using regex keep formatted summoner name to display what was entered
+    temp_name = args.toString().replace(/\s+/, ""); 
+    temp_name =  temp_name.replace(/,/g,'')
+    formatted_summoner_name =  args.join(' ');
+    const summonerName = temp_name
     const summonerApi = `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${config.RIOT_API_KEY}`;
     const masteryApi = 'https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner';
     const champImageUrl = `http://ddragon.leagueoflegends.com/cdn/${champData.version}/img/champion/`;
@@ -50,7 +54,7 @@ const mastery = (msg, args) => {
                 )
                 embedArr.push(embed)
             })
-            msg.reply(`Top 3 champion mastery for ${summonerName}`)
+            msg.reply(`Top 3 champion mastery for ${formatted_summoner_name}`)
             msg.channel.send({embeds: embedArr})
         })
     })
