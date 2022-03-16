@@ -2,6 +2,7 @@ const axios = require('axios')
 const { MessageEmbed } = require('discord.js');
 const config = require("../config.json");
 const champData = require("../static/champions.json")
+const { teamGenerator } = require("../utilities/helpers.js");
 
 const ping = (msg) => {
     msg.reply('Pong')
@@ -13,7 +14,7 @@ const tanner = (msg) => {
     return;
 }
 
-const mastery = (msg, args) => {
+const mastery = (msg, client, args) => {
     //remove white space and comma using regex keep formatted summoner name to display what was entered
     temp_name = args.toString().replace(/\s+/, ""); 
     temp_name =  temp_name.replace(/,/g,'')
@@ -61,6 +62,67 @@ const mastery = (msg, args) => {
     return;
 }
 
+const teams = (msg, client) => {
+    if (!msg.member.voice.channelId) {
+        msg.reply('You must be in a voice channel to do that.');
+        return;
+    }
+    const guild = client.guilds.cache.get(msg.guildId);
+    const TEAM_SIZE = 10;
+    let gamers = [];
+
+    msg.reply('React to this message while in a voice channel if you\'re playing 10s.')
+    .then(botReply => {
+        botReply.react('✅')
+        
+        // Check if user is in voice channel, reacting with correct emote and not a bot.
+        const filter = async (reaction, user) => {
+            if(!user.bot) {
+                let memberInfo;
+                await guild.members.fetch(user.id)
+                .then(member => {
+                    memberInfo = member;
+                })
+                if(memberInfo.voice.channelId && reaction.emoji.name === '✅') {
+                    return true
+                } else {
+                    msg.channel.send(`${user}, join the voice channel if you wish to play.`)
+                }
+            }
+        }
+        
+        const collector = botReply.createReactionCollector({
+            filter,
+            max: TEAM_SIZE,
+            time: 1000 * 5
+        })
+
+        collector.on('collect', (reaction, user) => {
+            gamers.push(user.username);
+        })
+
+        collector.on('end', (collected) => {
+            if(collected.size !== TEAM_SIZE) {
+                msg.reply(`Only ${collected.size} gamers reacted.`)
+                return;
+            }
+            const teams = teamGenerator(gamers);
+
+            let embed = new MessageEmbed();
+            embed.setTitle("Randomly generated teams")
+            .addFields(
+                { name: teams.teamOne.name, value: teams.teamOne.players.join('\n') },
+                { name: teams.teamTwo.name, value: teams.teamTwo.players.join('\n') },
+            )
+
+            msg.channel.send({ embeds: [embed] })
+        })
+
+    })
+
+    return;
+}
+
 const help = (msg) => {
     let embed = new MessageEmbed();
     embed.setTitle("Eeek games bot commands")
@@ -78,4 +140,4 @@ const help = (msg) => {
     return;
 }
 
-module.exports = { ping, tanner, mastery, help };
+module.exports = { ping, tanner, mastery, teams, help };

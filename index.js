@@ -8,7 +8,7 @@ const championsJson = require("./static/champions.json");
 const prefix = '!';
 
 const eekIntents = new Intents();
-eekIntents.add(Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS)
+eekIntents.add(Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS,)
 
 const leagueVersionApi = 'https://ddragon.leagueoflegends.com/api/versions.json';
 
@@ -53,7 +53,7 @@ client.on("messageCreate", msg => {
     // if the command is found, run the function
     if(textCommands[command]) {
         let commandFunction = textCommands[command];
-        commandFunction(msg, args);
+        commandFunction(msg, client, args);
     }
     else {
         msg.reply("Yebby is a peen")
