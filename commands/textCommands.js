@@ -94,7 +94,7 @@ const teams = (msg, client) => {
         const collector = botReply.createReactionCollector({
             filter,
             max: TEAM_SIZE,
-            time: 1000 * 5
+            time: 1000 * 60
         })
 
         collector.on('collect', (reaction, user) => {
@@ -123,6 +123,13 @@ const teams = (msg, client) => {
     return;
 }
 
+const milkman = (msg) => {
+    if(msg.mentions.users.first()) {
+        msg.delete();
+        msg.channel.send(`${msg.mentions.users.first()} THE MILKMAN IS FUCKING YOUR WIFE!!!`)
+    }
+}
+
 const help = (msg) => {
     let embed = new MessageEmbed();
     embed.setTitle("Eeek games bot commands")
@@ -131,7 +138,9 @@ const help = (msg) => {
     .addFields(
         { name: "!ping", value: "Bot replies with 'Pong'." },
         { name: "!tanner", value: "Bot replies with 'FUCK TANNER'." },
-        { name: "!mastery [summoner name]", value: "Bot will reply with the summoners top 3 champions." }
+        { name: "!mastery [summoner name]", value: "Bot will reply with the summoners top 3 champions." },
+        { name: "!milkman [@discord name]", value: "The milkman will fuck their wife." },
+        { name: "!teams", value: "Bot will create a message 10 users must react to within one minute. Once 10 users react, the bot will generate and post teams." },
     )
     .setImage('https://cdn.discordapp.com/attachments/866869860319232022/941456015826759761/812DC7BE-FA2C-4D82-9074-79789A4145A3.jpg')
     .setFooter({ text: "Nice cock bro", iconURL: "https://cdn.discordapp.com/emojis/592482696920432652.webp?size=96&quality=lossless"});
@@ -140,4 +149,4 @@ const help = (msg) => {
     return;
 }
 
-module.exports = { ping, tanner, mastery, teams, help };
+module.exports = { ping, tanner, mastery, teams, milkman, help };
