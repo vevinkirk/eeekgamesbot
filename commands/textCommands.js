@@ -71,7 +71,7 @@ const teams = (msg, client) => {
     const TEAM_SIZE = 10;
     let gamers = [];
 
-    msg.reply('React to this message while in a voice channel if you\'re playing 10s.')
+    msg.reply('Click the green checkmark while in a voice channel if you\'re playing 10s.')
     .then(botReply => {
         botReply.react('✅')
         
