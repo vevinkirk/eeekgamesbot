@@ -5,6 +5,8 @@ const { Client, Intents } = require("discord.js");
 const textCommands = require("./commands/textCommands.js");
 const config = require("./config.json");
 const championsJson = require("./static/champions.json");
+const helpers = require("./utilities/helpers.js");
+
 const prefix = '!';
 
 const eekIntents = new Intents();
@@ -41,7 +43,16 @@ client.on("ready", () => {
 })
 
 client.on("messageCreate", msg => {
+    var result = /!!/.test(msg.content);
     if (msg.author.bot) return;
+    if (msg.content == "!"){
+        return;
+    }else if (helpers.isIdentile(msg.content)){
+        return;
+    }else if (/!!/.test(msg.content)){
+        return;
+    }
+
     if (!msg.content.startsWith(prefix)) {
         return;
     }

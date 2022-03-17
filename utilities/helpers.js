@@ -7,6 +7,14 @@ const shuffle = (arr) => {
       }
 }
 
+
+const isIdentile = (string) => {
+    const letters = string.split('');
+    const unique = new Set(letters)
+    
+    return unique.size === 1 ? true: false;
+}
+
 const adjectiveArray = [
     'Filthy',
     'Naked',
@@ -51,4 +59,5 @@ const teamGenerator = (arr) => {
     return { teamOne, teamTwo }
 }
 
-module.exports = { teamGenerator };
+
+module.exports = { teamGenerator, isIdentile };
