@@ -59,5 +59,9 @@ const teamGenerator = (arr) => {
     return { teamOne, teamTwo }
 }
 
+const pluralGamers = (num) => {
+    return num === 1 ? 'gamer' : 'gamers';
+}
 
-module.exports = { teamGenerator, isIdentile };
+
+module.exports = { teamGenerator, isIdentile, pluralGamers };

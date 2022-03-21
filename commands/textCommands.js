@@ -2,7 +2,7 @@ const axios = require('axios')
 const { MessageEmbed } = require('discord.js');
 const config = require("../config.json");
 const champData = require("../static/champions.json")
-const { teamGenerator } = require("../utilities/helpers.js");
+const { teamGenerator, pluralGamers } = require("../utilities/helpers.js");
 
 const ping = (msg) => {
     msg.reply('Pong')
@@ -69,6 +69,7 @@ const teams = (msg, client) => {
     }
     const guild = client.guilds.cache.get(msg.guildId);
     const TEAM_SIZE = 10;
+    // let gamers = ['one','two','three','four','five','six','seven','eight','nine'];
     let gamers = [];
 
     msg.reply('Click the green checkmark while in a voice channel if you\'re playing 10s.')
@@ -84,6 +85,7 @@ const teams = (msg, client) => {
                     memberInfo = member;
                 })
                 if(memberInfo.voice.channelId && reaction.emoji.name === '✅') {
+                    gamers.push(user.username)
                     return true
                 } else {
                     msg.channel.send(`${user}, join the voice channel if you wish to play.`)
@@ -91,20 +93,12 @@ const teams = (msg, client) => {
             }
         }
         
-        const collector = botReply.createReactionCollector({
-            filter,
-            max: TEAM_SIZE,
-            time: 1000 * 60
-        })
-
-        collector.on('collect', (reaction, user) => {
-            gamers.push(user.username);
-        })
-
-        collector.on('end', (collected) => {
-            if(collected.size !== TEAM_SIZE) {
-                msg.reply(`Only ${collected.size} gamers reacted.`)
-                return;
+        botReply.awaitReactions({ filter, maxUsers: TEAM_SIZE, time: 5000})
+        .then(collected => {
+            const checkmark = collected.first();
+            if(gamers.length < TEAM_SIZE){
+                msg.channel.send(`Only ${checkmark.count} ${pluralGamers(checkmark.count)} reacted.`)
+                return
             }
             const teams = teamGenerator(gamers);
 
@@ -117,7 +111,6 @@ const teams = (msg, client) => {
 
             msg.channel.send({ embeds: [embed] })
         })
-
     })
 
     return;
