@@ -93,11 +93,11 @@ const teams = (msg, client) => {
             }
         }
         
-        botReply.awaitReactions({ filter, maxUsers: TEAM_SIZE, time: 5000})
+        botReply.awaitReactions({ filter, maxUsers: TEAM_SIZE, time: 1000 * 60})
         .then(collected => {
             const checkmark = collected.first();
             if(gamers.length < TEAM_SIZE){
-                msg.channel.send(`Only ${checkmark.count} ${pluralGamers(checkmark.count)} reacted.`)
+                msg.channel.send(`Only ${gamers.length} ${pluralGamers(gamers.length)} reacted.`)
                 return
             }
             const teams = teamGenerator(gamers);
