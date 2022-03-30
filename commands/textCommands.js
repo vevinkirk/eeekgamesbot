@@ -98,7 +98,6 @@ const teams = (msg, client) => {
         botReply.awaitReactions({ filter, maxUsers: TEAM_SIZE, time: 1000 * 10})
         .then(collected => {
             const checkmark = collected.first();
-            console.log('gamers', gamers)
             if(gamers.length < TEAM_SIZE){
                 msg.channel.send(`Only ${gamers.length} ${pluralGamers(gamers.length)} reacted.`)
                 return
