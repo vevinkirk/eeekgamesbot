@@ -85,7 +85,9 @@ const teams = (msg, client) => {
                     memberInfo = member;
                 })
                 if(memberInfo.voice.channelId && reaction.emoji.name === '✅') {
-                    gamers.push(user.username)
+                    if (!gamers.includes(user.username)) {
+                        gamers.push(user.username)
+                    } 
                     return true
                 } else {
                     msg.channel.send(`${user}, join the voice channel if you wish to play.`)
@@ -93,7 +95,7 @@ const teams = (msg, client) => {
             }
         }
         
-        botReply.awaitReactions({ filter, maxUsers: TEAM_SIZE, time: 1000 * 60})
+        botReply.awaitReactions({ filter, maxUsers: TEAM_SIZE, time: 1000 * 10})
         .then(collected => {
             const checkmark = collected.first();
             if(gamers.length < TEAM_SIZE){
