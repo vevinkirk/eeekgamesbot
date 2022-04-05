@@ -95,7 +95,7 @@ const teams = (msg, client) => {
             }
         }
         
-        botReply.awaitReactions({ filter, maxUsers: TEAM_SIZE, time: 1000 * 10})
+        botReply.awaitReactions({ filter, maxUsers: TEAM_SIZE, time: 1000 * 60})
         .then(collected => {
             const checkmark = collected.first();
             if(gamers.length < TEAM_SIZE){
