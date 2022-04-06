@@ -8,16 +8,6 @@ const config = require("../config.json");
 const champData = require("../static/champions.json")
 const { teamGenerator, pluralGamers } = require("../utilities/helpers.js");
 
-const ping = (msg) => {
-    msg.reply('Pong')
-    return;
-}
-
-const tanner = (msg) => {
-    msg.reply('FUCK TANNER')
-    return;
-}
-
 const mastery = (msg, client, args) => {
     //remove white space and comma using regex keep formatted summoner name to display what was entered
     temp_name = args.toString().replace(/\s+/, ""); 
@@ -161,34 +151,14 @@ const jungle_oncall  = (msg) => {
     let embed = new MessageEmbed();
     
     embed.setTitle("Jungle Oncall")
-    .setColor(0x3498DB)
-    .setDescription('Use this message to see the oncall for jungle')
-    .setImage("http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Graves.png")
-    .setThumbnail("http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Graves.png")
-    .setTimestamp()
-    .setFooter({text: "MAKE JOE JUNGLE AGAIN", iconURL: "http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Urgot.png"});
-    msg.reply({ embeds: [embed] })
-    return;
-}
+      .setColor(0x3498DB)
+      .setDescription('Use this message to see the oncall for jungle')
+      .setImage("http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Graves.png")
+      .setThumbnail("http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Graves.png")
+      .setTimestamp()
+      .setFooter({text: "MAKE JOE JUNGLE AGAIN", iconURL: "http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Urgot.png"});
+      msg.reply({ embeds: [embed] })
+      return;
+  }
 
-const help = (msg) => {
-    let embed = new MessageEmbed();
-    embed.setTitle("Eeek games bot commands")
-    .setDescription('Use the prefix \'!\' plus the following commands')
-    .setAuthor({ name: 'Created by the dev boys', iconURL: 'https://cdn.discordapp.com/emojis/660667449620037674.gif?size=96&quality=lossless', url: 'https://github.com/vevinkirk/eeekgamesbot' })
-    .addFields(
-        { name: "!ping", value: "Bot replies with 'Pong'." },
-        { name: "!tanner", value: "Bot replies with 'FUCK TANNER'." },
-        { name: "!mastery [summoner name]", value: "Bot will reply with the summoners top 3 champions." },
-        { name: "!milkman [@discord name]", value: "The milkman will fuck their wife." },
-        { name: "!teams", value: "Bot will create a message 10 users must react to within one minute. Once 10 users react, the bot will generate and post teams." },
-        { name: "!version", value: "Display version and latest commit." },
-    )
-    .setImage('https://cdn.discordapp.com/attachments/866869860319232022/941456015826759761/812DC7BE-FA2C-4D82-9074-79789A4145A3.jpg')
-    .setFooter({ text: "Nice cock bro", iconURL: "https://cdn.discordapp.com/emojis/592482696920432652.webp?size=96&quality=lossless"});
-
-    msg.reply({ embeds: [embed] })
-    return;
-}
-
-module.exports = { ping, tanner, mastery, jungle_oncall, team_generator, milkman, teams, help, version };
+module.exports = { mastery, jungle_oncall, team_generator, milkman, teams, help };
