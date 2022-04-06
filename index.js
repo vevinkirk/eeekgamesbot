@@ -45,6 +45,7 @@ client.on("ready", () => {
 client.on("messageCreate", msg => {
     var result = /!!/.test(msg.content);
     if (msg.author.bot) return;
+    msg.reply("this was automated")
     //if message is from eeek cucks print deprecate message at random intervalss
     if (msg.guild.id == "866869860319232020"){
         flag = helpers.getRandomInt(0,20)
