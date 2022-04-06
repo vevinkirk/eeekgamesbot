@@ -1,3 +1,5 @@
+const package = require('../package.json');
+
 const axios = require('axios')
 const { MessageEmbed } = require('discord.js');
 const config = require("../config.json");
@@ -144,4 +146,8 @@ const help = (msg) => {
     return;
 }
 
-module.exports = { ping, tanner, mastery, teams, milkman, help };
+const version = () => {
+    msg.reply(`Current version: ${package.version}`)
+}
+
+module.exports = { ping, tanner, mastery, teams, milkman, help, version };

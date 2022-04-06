@@ -1,6 +1,6 @@
 {
   "name": "eeekgamesbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Eeek games discord bot",
   "main": "index.js",
   "scripts": {
