@@ -1,3 +1,7 @@
+const package = require('../package.json');
+const revision = require('child_process')
+  .execSync('git log -1 --format=%s')
+  .toString().trim()
 const axios = require('axios')
 const { MessageEmbed } = require('discord.js');
 const config = require("../config.json");
@@ -115,23 +119,10 @@ const milkman = (msg) => {
     }
 }
 
-const help = (msg) => {
-    let embed = new MessageEmbed();
-    embed.setTitle("Eeek games bot commands")
-    .setDescription('Use the prefix \'!\' plus the following commands')
-    .setAuthor({ name: 'Created by the dev boys', iconURL: 'https://cdn.discordapp.com/emojis/660667449620037674.gif?size=96&quality=lossless', url: 'https://github.com/vevinkirk/eeekgamesbot' })
-    .addFields(
-        { name: "!mastery [summoner name]", value: "Bot will reply with the summoners top 3 champions." },
-        { name: "!milkman [@discord name]", value: "The milkman will fuck their wife." },
-        { name: "!teams", value: "Bot will create a message 10 users must react to within one minute. Once 10 users react, the bot will generate and post teams." },
-    )
-    .setImage('https://cdn.discordapp.com/attachments/866869860319232022/941456015826759761/812DC7BE-FA2C-4D82-9074-79789A4145A3.jpg')
-    .setFooter({ text: "Nice cock bro", iconURL: "https://cdn.discordapp.com/emojis/592482696920432652.webp?size=96&quality=lossless"});
 
-    msg.reply({ embeds: [embed] })
-    return;
+const version = (msg) => {
+    msg.reply(`Current version: \`${package.version}\` \nLatest commit: \`${revision}\``)
 }
-
 
 const team_generator = (msg, client, args) => {
     rank = {
@@ -158,7 +149,7 @@ const get_league_rank_internal = ( summoner ) => {
 
 const jungle_oncall  = (msg) => {
     let embed = new MessageEmbed();
-  
+    
     embed.setTitle("Jungle Oncall")
       .setColor(0x3498DB)
       .setDescription('Use this message to see the oncall for jungle')
