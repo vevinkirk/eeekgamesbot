@@ -9,7 +9,7 @@ hooks:
       timeout: 300
       runas: admin
   BeforeInstall:
-    - location: scrtips/before_install.sh
+    - location: scripts/before_install.sh
       timeout: 300
       runas: admin
   ApplicationStart:
