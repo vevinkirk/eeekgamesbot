@@ -161,4 +161,4 @@ const jungle_oncall  = (msg) => {
       return;
   }
 
-module.exports = { mastery, jungle_oncall, team_generator, milkman, teams, help };
+module.exports = { mastery, jungle_oncall, team_generator, milkman, teams };
