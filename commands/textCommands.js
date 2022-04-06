@@ -1,5 +1,7 @@
 const package = require('../package.json');
-
+const revision = require('child_process')
+  .execSync('git log -1 --format=%s')
+  .toString().trim()
 const axios = require('axios')
 const { MessageEmbed } = require('discord.js');
 const config = require("../config.json");
@@ -146,8 +148,8 @@ const help = (msg) => {
     return;
 }
 
-const version = () => {
-    msg.reply(`Current version: ${package.version}`)
+const version = (msg) => {
+    msg.reply(`Current version: \`${package.version}\` \nLatest commit: \`${revision}\``)
 }
 
 module.exports = { ping, tanner, mastery, teams, milkman, help, version };
