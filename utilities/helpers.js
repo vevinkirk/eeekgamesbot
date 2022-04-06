@@ -63,5 +63,11 @@ const pluralGamers = (num) => {
     return num === 1 ? 'gamer' : 'gamers';
 }
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-module.exports = { teamGenerator, isIdentile, pluralGamers };
+
+module.exports = { teamGenerator, isIdentile, getRandomInt, pluralGamers };
