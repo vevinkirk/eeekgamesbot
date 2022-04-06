@@ -144,4 +144,42 @@ const help = (msg) => {
     return;
 }
 
-module.exports = { ping, tanner, mastery, teams, milkman, help };
+
+const team_generator = (msg, client, args) => {
+    rank = {
+        "iron": 5, 
+        "bronze": 10, 
+        "silver": 15, 
+        "gold": 20, 
+        "platinum": 25, 
+        "diamond": 30, 
+        "master": 35, 
+        "grandmaster": 40, 
+        "challenger": 45
+    }
+    let team1 = {}
+    let team2 = {}
+    args.forEach(x => 
+        config.RIOT_API_KEY
+    )
+}
+
+const get_league_rank_internal = ( summoner ) => {
+    config.RIOT_API_KEY
+}
+
+const jungle_oncall  = (msg) => {
+    let embed = new MessageEmbed();
+  
+    embed.setTitle("Jungle Oncall")
+      .setColor(0x3498DB)
+      .setDescription('Use this message to see the oncall for jungle')
+      .setImage("http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Graves.png")
+      .setThumbnail("http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Graves.png")
+      .setTimestamp()
+      .setFooter({text: "MAKE JOE JUNGLE AGAIN", iconURL: "http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Urgot.png"});
+      msg.reply({ embeds: [embed] })
+      return;
+  }
+
+module.exports = { ping, tanner, mastery, jungle_oncall, team_generator, milkman, teams, help };
