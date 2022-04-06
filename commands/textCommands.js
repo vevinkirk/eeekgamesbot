@@ -4,16 +4,6 @@ const config = require("../config.json");
 const champData = require("../static/champions.json")
 const { teamGenerator, pluralGamers } = require("../utilities/helpers.js");
 
-const ping = (msg) => {
-    msg.reply('Pong')
-    return;
-}
-
-const tanner = (msg) => {
-    msg.reply('FUCK TANNER')
-    return;
-}
-
 const mastery = (msg, client, args) => {
     //remove white space and comma using regex keep formatted summoner name to display what was entered
     temp_name = args.toString().replace(/\s+/, ""); 
@@ -131,8 +121,6 @@ const help = (msg) => {
     .setDescription('Use the prefix \'!\' plus the following commands')
     .setAuthor({ name: 'Created by the dev boys', iconURL: 'https://cdn.discordapp.com/emojis/660667449620037674.gif?size=96&quality=lossless', url: 'https://github.com/vevinkirk/eeekgamesbot' })
     .addFields(
-        { name: "!ping", value: "Bot replies with 'Pong'." },
-        { name: "!tanner", value: "Bot replies with 'FUCK TANNER'." },
         { name: "!mastery [summoner name]", value: "Bot will reply with the summoners top 3 champions." },
         { name: "!milkman [@discord name]", value: "The milkman will fuck their wife." },
         { name: "!teams", value: "Bot will create a message 10 users must react to within one minute. Once 10 users react, the bot will generate and post teams." },
@@ -182,4 +170,4 @@ const jungle_oncall  = (msg) => {
       return;
   }
 
-module.exports = { ping, tanner, mastery, jungle_oncall, team_generator, milkman, teams, help };
+module.exports = { mastery, jungle_oncall, team_generator, milkman, teams, help };
