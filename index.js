@@ -2,7 +2,7 @@ const FileSystem = require("fs");
 const axios = require('axios')
 const { Client, Intents } = require("discord.js");
 
-const textCommands = require("./commands/textCommands.js");
+const textCommands = require("./commands/index.js");
 const config = require("./config.json");
 const championsJson = require("./static/champions.json");
 const helpers = require("./utilities/helpers.js");
@@ -70,6 +70,7 @@ client.on("messageCreate", msg => {
 
     // if the command is found, run the function
     if(textCommands[command]) {
+        console.log({ textCommands })
         let commandFunction = textCommands[command];
         commandFunction(msg, client, args);
     }
