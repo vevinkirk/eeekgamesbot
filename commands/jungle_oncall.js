@@ -1,17 +1,21 @@
 const { MessageEmbed } = require('discord.js');
 
-const jungle_oncall  = (msg) => {
-    let embed = new MessageEmbed();
-
-    embed.setTitle("Jungle Oncall")
-    .setColor(0x3498DB)
-    .setDescription('Use this message to see the oncall for jungle')
-    .setImage("http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Graves.png")
-    .setThumbnail("http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Graves.png")
-    .setTimestamp()
-    .setFooter({text: "MAKE JOE JUNGLE AGAIN", iconURL: "http://ddragon.leagueoflegends.com/cdn/12.5.1/img/champion/Urgot.png"});
-    msg.reply({ embeds: [embed] })
-    return;
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-  module.exports = jungle_oncall;
+const jungle_oncall  = (msg) => {
+    const members_array = []
+    let channel = msg.member.voice.channel.members.each(member=>{
+      members_array.push(member.user.tag)
+   })
+   let arr_len = members_array.length
+   flag = getRandomInt(0,(arr_len-1))
+   console.log("Jungle oncall is" + members_array[flag])
+   msg.reply("Jungle oncall is" + members_array[flag])
+
+}
+
+module.exports = jungle_oncall;
