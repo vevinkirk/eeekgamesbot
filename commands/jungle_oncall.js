@@ -7,7 +7,7 @@ function getRandomInt(min, max) {
 }
 
 const jungle_oncall  = (msg) => {
-    const members_array = []
+/*    const members_array = []
     let channel = msg.member.voice.channel.members.each(member=>{
       members_array.push(member.user.tag)
    })
@@ -15,7 +15,8 @@ const jungle_oncall  = (msg) => {
    flag = getRandomInt(0,(arr_len-1))
    console.log("Jungle oncall is" + members_array[flag])
    msg.reply("Jungle oncall is" + members_array[flag])
-
+*/
+   msg.reply("This function is being reworked")
 }
 
 module.exports = jungle_oncall;
