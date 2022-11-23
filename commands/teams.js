@@ -57,7 +57,11 @@ const teams = (msg, client) => {
                     } 
                     return true
                 } else if (!memberInfo.voice.channelId) {
-                    msg.channel.send(`${user}, join the voice channel if you wish to play.`)
+                    try {
+                        msg.channel.send(`${user}, join the voice channel if you wish to play.`)
+                    } catch (error) {
+                        console.log({error})
+                    }
                 }
             }
         }
@@ -65,13 +69,17 @@ const teams = (msg, client) => {
         client.on("messageReactionRemove", async (reaction, user) => {
             if (user.bot || reaction.message.id !== botReply.id) return;
             if(gamers.includes(user.username)) {
-                gamers.splice(gamers.indexOf(user.username), 1);
-                inChannel = [];
-                msg.member.voice.channel.members.each(member=>{
-                    inChannel.push(member.user.username)
-                })
-                inChannel = inChannel.filter(user => !gamers.includes(user))
-                updateEmbed(botReply, inChannel)
+                try {
+                    gamers.splice(gamers.indexOf(user.username), 1);
+                    inChannel = [];
+                    msg.member.voice.channel.members.each(member=>{
+                        inChannel.push(member.user.username)
+                    })
+                    inChannel = inChannel.filter(user => !gamers.includes(user))
+                    updateEmbed(botReply, inChannel)
+                } catch (error) {
+                    console.log({ error })
+                }
             }
         });
         
@@ -81,16 +89,19 @@ const teams = (msg, client) => {
                 msg.channel.send(`Only ${gamers.length} ${pluralGamers(gamers.length)} reacted.`)
                 return
             }
-            const teams = teamGenerator(gamers);
+            try {
+                const teams = teamGenerator(gamers);
 
-            let embed = new MessageEmbed();
-            embed.setTitle("Randomly generated teams")
-            .addFields(
-                { name: teams.teamOne.name, value: teams.teamOne.players.join('\n') },
-                { name: teams.teamTwo.name, value: teams.teamTwo.players.join('\n') },
-            )
-
-            msg.channel.send({ embeds: [embed] })
+                let embed = new MessageEmbed();
+                embed.setTitle("Randomly generated teams")
+                .addFields(
+                    { name: teams.teamOne.name, value: teams.teamOne.players.join('\n') },
+                    { name: teams.teamTwo.name, value: teams.teamTwo.players.join('\n') },
+                )
+                msg.channel.send({ embeds: [embed] })
+            } catch (error) {
+                console.log({error})
+            }
         })
     })
 
