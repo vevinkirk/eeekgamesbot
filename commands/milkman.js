@@ -14,3 +14,4 @@ module.exports = {
         await interaction.reply(`${interaction.options.getUser('user')} THE MILKMAN IS FUCKING YOUR WIFE!!!`)
     }
   };
+  
