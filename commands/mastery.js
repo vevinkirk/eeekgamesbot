@@ -56,7 +56,7 @@ async function mastery(interaction) {
         })
     } catch (error) {
         console.log({ error })
-        await interaction.reply(`Error: Summoner ${summonerName} not found.`);
+        await interaction.reply(`Error: Summoner ${summonerName} not found. If this seems to be an error, check your API key.`);
     }
     return;
 }

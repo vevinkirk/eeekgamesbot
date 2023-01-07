@@ -22,7 +22,12 @@ const client = new Client({
         GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.Guilds
+        GatewayIntentBits.Guilds,
+				GatewayIntentBits.GuildBans,
+				GatewayIntentBits.GuildMembers,
+				GatewayIntentBits.MessageContent,
+				GatewayIntentBits.DirectMessages,
+				GatewayIntentBits.DirectMessageReactions,
     ],
     partials: [
         Partials.Channel
