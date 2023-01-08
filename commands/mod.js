@@ -53,7 +53,7 @@ module.exports = {
       console.log({ subcommand, handler })
       await handler(interaction);
     } catch (err) {
-      await interaction.editReply('An error ocurred');
+      await interaction.editReply(`An error ocurred: ${err}`);
     }
   },
 };

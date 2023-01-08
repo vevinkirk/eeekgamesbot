@@ -1,14 +1,42 @@
-const { PermissionFlagsBits } = require("discord.js");
+const { PermissionFlagsBits, EmbedBuilder } = require("discord.js");
 const { calculateMilliseconds }  = require("../../../utils/calculateMiliseconds");
 
 const handleMute = async (interaction) => {
+
+  function createErrEmbed(err) {
+    return new EmbedBuilder()
+      .setTitle('Something went wrong. Please try again later.')
+      .setColor(0xc72c3b)
+      .addFields({
+        name: 'Error',
+        value: `${err}`
+      })
+
+  }
+
   try {
-    const { guild, member } = interaction;
-    const target = interaction.options.getUser("target", true);
-    const duration = interaction.options.getInteger("duration", true);
-    const durationUnit = interaction.options.getString("unit", true);
-    const reason = interaction.options.getString("reason", true);
+    const { guild, member, options } = interaction;
+    const target = options.getUser("target", true);
+    const targetMember = guild.members.cache.get(target.id);
+    const duration = options.getInteger("duration", true);
+    const durationUnit = options.getString("unit", true);
+    const reason = options.getString("reason", true);
     const durationMilliseconds = calculateMilliseconds(duration, durationUnit);
+
+    const successEmbed = new EmbedBuilder()
+      .setTitle(":white_check_mark: Muted")
+      .setDescription(`${target} has been muted.`)
+      .setColor(0x0099FF)
+      .addFields({
+        name: 'Reason',
+        value: `${reason}`,
+        inline: true
+      })
+      .addFields({
+        name: 'Time',
+        value: `${duration} ${durationUnit}`,
+        inline: true
+      })
 
     if (!durationMilliseconds) {
       await interaction.editReply({
@@ -31,7 +59,7 @@ const handleMute = async (interaction) => {
       return;
     }
 
-    const targetMember = await guild.members.fetch(target.id).catch(() => null);
+    // const targetMember = await guild.members.fetch(target.id).catch(() => null);
 
     const channel = targetMember.voice.channel
 
@@ -76,16 +104,18 @@ const handleMute = async (interaction) => {
       return;
     }
 
-    const targetUser = await guild.members.fetch(target.id);
+    // const targetUser = await guild.members.fetch(target.id);
 
-    await targetUser.timeout(durationMilliseconds, reason);
+    await targetMember.timeout(durationMilliseconds, reason);
 
     await interaction.editReply({
-      content: "Muted " + target.tag + " for " + reason,
+      embeds: [successEmbed]
     });
   } catch (err) {
     console.log({err})
-    await interaction.editReply('An error ocurred');
+    await interaction.editReply({
+      embeds: [createErrEmbed(err)]
+    });
   }
 };
 
