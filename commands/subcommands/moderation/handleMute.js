@@ -2,6 +2,18 @@ const { PermissionFlagsBits, EmbedBuilder } = require("discord.js");
 const { calculateMilliseconds }  = require("../../../utils/calculateMiliseconds");
 
 const handleMute = async (interaction) => {
+
+  function createErrEmbed(err) {
+    return new EmbedBuilder()
+      .setTitle('Something went wrong. Please try again later.')
+      .setColor(0xc72c3b)
+      .addFields({
+        name: 'Error',
+        value: `${err}`
+      })
+
+  }
+
   try {
     const { guild, member, options } = interaction;
     const target = options.getUser("target", true);
@@ -10,10 +22,6 @@ const handleMute = async (interaction) => {
     const durationUnit = options.getString("unit", true);
     const reason = options.getString("reason", true);
     const durationMilliseconds = calculateMilliseconds(duration, durationUnit);
-
-    const errEmbed = new EmbedBuilder()
-      .setDescription('Something went wrong. Please try again later.')
-      .setColor(0xc72c3b)
 
     const successEmbed = new EmbedBuilder()
       .setTitle(":white_check_mark: Muted")
@@ -81,12 +89,12 @@ const handleMute = async (interaction) => {
       return;
     }
 
-    if (target.id === member.user.id) {
-      await interaction.editReply({
-        content: "You can't mute yourself!",
-      });
-      return;
-    }
+    // if (target.id === member.user.id) {
+    //   await interaction.editReply({
+    //     content: "You can't mute yourself!",
+    //   });
+    //   return;
+    // }
     
     // Bot ID
     if (target.id === 948683359549292544) {
@@ -106,7 +114,7 @@ const handleMute = async (interaction) => {
   } catch (err) {
     console.log({err})
     await interaction.editReply({
-      embeds: [errEmbed]
+      embeds: [createErrEmbed(err)]
     });
   }
 };
