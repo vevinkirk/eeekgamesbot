@@ -89,12 +89,12 @@ const handleMute = async (interaction) => {
       return;
     }
 
-    // if (target.id === member.user.id) {
-    //   await interaction.editReply({
-    //     content: "You can't mute yourself!",
-    //   });
-    //   return;
-    // }
+    if (target.id === member.user.id) {
+      await interaction.editReply({
+        content: "You can't mute yourself!",
+      });
+      return;
+    }
     
     // Bot ID
     if (target.id === 948683359549292544) {
