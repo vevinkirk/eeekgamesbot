@@ -80,67 +80,37 @@ client.on('interactionCreate', interaction => {
     }
 })
 
-// client.on("ready", () => {
-//     console.log("Logged in as Eeek games bot, checking for champions.json")
+client.on("ready", () => {
+    console.log("Logged in as Eeek games bot, checking for champions.json")
 
-//     let currentVersion = '';
+    // get current league version
+    axios.get(leagueVersionApi)
+    .then(res => {
+        let currentVersion = res.data[0];
+        // if current version of champion.json is behind or doesn't exist, get the newer version
+        if(!championsJson || championsJson.version !== currentVersion) {
+            console.log("Version mismatch")
+            axios.get(`http://ddragon.leagueoflegends.com/cdn/${currentVersion}/data/en_US/champion.json`)
+            .then(res => {
+                FileSystem.writeFile("./static/champions.json", JSON.stringify(res.data), "utf8", (err,res) => {
+                    if(err)console.log(err);
+                    console.info(res);
+                })
+            } )
+        } else {
+            console.log(`Version ${currentVersion} good to go`)
+        }
+    })
+})
 
-//     // get current league version
-//     axios.get(leagueVersionApi)
-//     .then(res => {
-//         currentVersion = res.data[0];
-//         // if current version of champion.json is behind or doesn't exist, get the newer version
-//         if(!championsJson || championsJson.version !== currentVersion) {
-//             console.log("Version mismatch")
-//             axios.get(`http://ddragon.leagueoflegends.com/cdn/${currentVersion}/data/en_US/champion.json`)
-//             .then(res => {
-//                 FileSystem.writeFile("./static/champions.json", JSON.stringify(res.data), "utf8", (err,res) => {
-//                     if(err)console.log(err);
-//                     console.info(res);
-//                 })
-//             } )
-//         } else {
-//             console.log("Version good to go")
-//         }
-//     })
-
-// })
-
-// client.on("messageCreate", msg => {
-//     var result = /!!/.test(msg.content);
-//     if (msg.author.bot) return;
-//     //if message is from eeek cucks print deprecate message at random intervalss
-//     if (msg.guild.id == "866869860319232020"){
-//         flag = helpers.getRandomInt(0,20)
-//         if (flag === 7){
-//             msg.reply("Server is deprecated, no further support will be given");
-//         }
-//     }
-//     if (msg.content == "!"){
-//         return;
-//     }else if (helpers.isIdentile(msg.content)){
-//         return;
-//     }else if (/!!/.test(msg.content)){
-//         return;
-//     }
-
-//     if (!msg.content.startsWith(prefix)) {
-//         return;
-//     }
-//     // Get command body and ensure commands aren't case-sensitive.
-//     let commandBody = msg.content.slice(prefix.length);
-//     const args = commandBody.split(' ');
-//     const command = args.shift().toLowerCase();
-
-//     // if the command is found, run the function
-//     if(textCommands[command]) {
-//         console.log({ textCommands })
-//         let commandFunction = textCommands[command];
-//         commandFunction(msg, client, args);
-//     }
-//     else {
-//         msg.reply("Yebby is a peen")
-//     }
-// })
+client.on("messageCreate", msg => {
+    //if message is from eeek cucks print deprecate message at random intervalss
+    if (msg.guild.id == "866869860319232020"){
+        flag = helpers.getRandomInt(0,20)
+        if (flag === 7){
+            msg.reply("Server is deprecated, no further support will be given");
+        }
+    }
+})
 
 client.login(DISCORD_BOT_TOKEN); 
