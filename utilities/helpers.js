@@ -1,3 +1,9 @@
+const { Intl } = require('intl');
+
+function formatNumber(num, format) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: format}).format(num);
+}
+
 const shuffle = (arr) => {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -70,4 +76,5 @@ function getRandomInt(min, max) {
 }
 
 
-module.exports = { teamGenerator, isIdentile, getRandomInt, pluralGamers };
+
+module.exports = { teamGenerator, isIdentile, getRandomInt, pluralGamers, formatNumber };

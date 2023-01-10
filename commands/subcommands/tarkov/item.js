@@ -1,10 +1,6 @@
 const { request, gql } = require('graphql-request');
 const { EmbedBuilder } = require('discord.js');
-const { Intl } = require('intl')
-
-function formatNumber(num) {
-  return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB'}).format(num);
-}
+const { formatNumber } = require('../../../utilities/helpers')
 
 function createEmbed(itemObject) {
   const itemEmbed =  new EmbedBuilder()
@@ -13,8 +9,8 @@ function createEmbed(itemObject) {
       .setColor(0x0099FF)
       .addFields(
         { name: "Description", value: `${itemObject.description}` },
-        { name: "Base price", value: `${formatNumber(itemObject.basePrice)}`},
-        { name: "Average 24 hour flea price", value: `${formatNumber(itemObject.avg24hPrice)}`},
+        { name: "Base price", value: `${formatNumber(itemObject.basePrice, 'RUB')}`},
+        { name: "Average 24 hour flea price", value: `${formatNumber(itemObject.avg24hPrice, 'RUB')}`},
       )
       if(itemObject.usedInTasks.length) {
         itemObject.usedInTasks.forEach(task => {
