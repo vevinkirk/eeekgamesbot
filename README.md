@@ -1,7 +1,7 @@
 # eeekgamesbot
 The eeek games bot
 
-## To run 
+## To run locally
 
 1. Create a `config.json` and add `DISCORD_BOT_TOKEN`
     ```json
@@ -12,6 +12,10 @@ The eeek games bot
     }
     ```
 2. Run `npm install`
-3. Run `node index.js`
+3. Run `npm start`
+
+## Registering a new command
+
+In order to register a new command, one must run `npm run new`
 
 Should autodeploy on merge
