@@ -26,7 +26,6 @@ module.exports = {
       await interaction.deferReply();
       const subcommand = interaction.options.getSubcommand();
       const handler = handlers[subcommand] || handleInvalidSubcommand;
-      console.log({ subcommand, handler })
       await handler(interaction);
     } catch (err) {
       await interaction.editReply('An error ocurred');
