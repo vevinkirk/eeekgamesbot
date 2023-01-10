@@ -4,13 +4,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, GatewayIntentBits, Partials, Events, Collection } = require("discord.js");
 const { DISCORD_BOT_TOKEN } = require('./config.json');
+const helpers = require("./utilities/helpers.js");
 const { generateTeams } = require('./commands/teams');
 
 // const textCommands = require("./commands/index.js");
 const championsJson = require("./static/champions.json");
-const helpers = require("./utilities/helpers.js");
-
-const prefix = '!';
 
 const leagueVersionApi = 'https://ddragon.leagueoflegends.com/api/versions.json';
 
