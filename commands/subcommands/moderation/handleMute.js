@@ -11,7 +11,6 @@ const handleMute = async (interaction) => {
         name: 'Error',
         value: `${err}`
       })
-
   }
 
   try {
@@ -59,10 +58,9 @@ const handleMute = async (interaction) => {
       return;
     }
 
-    // const targetMember = await guild.members.fetch(target.id).catch(() => null);
-
     const channel = targetMember.voice.channel
 
+    // check if member has moderation perms
     if (
       !member ||
       typeof member.permissions === "string" ||
@@ -103,8 +101,6 @@ const handleMute = async (interaction) => {
       });
       return;
     }
-
-    // const targetUser = await guild.members.fetch(target.id);
 
     await targetMember.timeout(durationMilliseconds, reason);
 

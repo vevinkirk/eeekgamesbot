@@ -1,7 +1,9 @@
-const { Intl } = require('intl');
-
-function formatNumber(num, format) {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: format}).format(num);
+function formatCurrency(num, currency) {
+  const formatOptions = {
+    'Rubles': new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB'}),
+    'Dollar': new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
+  }
+  return formatOptions[currency].format(num);
 }
 
 const shuffle = (arr) => {
@@ -77,4 +79,4 @@ function getRandomInt(min, max) {
 
 
 
-module.exports = { teamGenerator, isIdentile, getRandomInt, pluralGamers, formatNumber };
+module.exports = { teamGenerator, isIdentile, getRandomInt, pluralGamers, formatCurrency };
