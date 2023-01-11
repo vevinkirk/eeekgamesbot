@@ -1,5 +1,6 @@
 # eeekgamesbot
 The eeek games bot
+A collection of stupid commands for stupid people.
 
 ## To run locally
 
