@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd /home/admin/eeekgamesbot/eeekgamesbot
+sudo chown -R admin:admin /home/admin/eeekgamesbot/eeekgamesbot/*
 
 npm install
 pm2 start npm --name "eeekgamesbot"
