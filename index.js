@@ -1,4 +1,4 @@
-// const FileSystem = require("fs");
+const FileSystem = require("fs");
 const axios = require('axios')
 const fs = require('node:fs');
 const path = require('node:path');
@@ -70,11 +70,17 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
+// Custom buttons
 client.on('interactionCreate', interaction => {
     if (interaction.isButton()) {
         if(interaction.customId === 'reroll') {
             generateTeams(interaction, interaction.user.username)
         }
+        if(interaction.customId === 'timeout') {
+            console.log(interaction.user.username)
+            console.log(interaction.fields)
+        }
+        
     }
 })
 

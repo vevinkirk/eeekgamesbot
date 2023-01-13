@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, SlashCommandSubcommandBuilder } = require('discord.js');
-const { handleMute } = require("./subcommands/moderation/handleMute");
+const { handleTimeout } = require("./subcommands/moderation/handleTimeout");
 
 
 const handlers = {
-  mute: handleMute,
+  timeout: handleTimeout,
 };
 
 module.exports = {
@@ -12,18 +12,18 @@ module.exports = {
     .setDescription('Moderation commands')
     .addSubcommand(
       new SlashCommandSubcommandBuilder()
-        .setName("mute")
-        .setDescription("Mutes a user via your configured muted role.")
+        .setName("timeout")
+        .setDescription("Times out a user for x time")
         .addUserOption((option) =>
           option
             .setName("target")
-            .setDescription("The user to mute.")
+            .setDescription("The user to time out.")
             .setRequired(true)
         )
         .addIntegerOption((option) =>
           option
             .setName("duration")
-            .setDescription("The length of time to mute the user.")
+            .setDescription("The length of time to time out the user.")
             .setRequired(true)
         )
         .addStringOption((option) =>
@@ -32,6 +32,7 @@ module.exports = {
             .setDescription("The unit of time for the duration.")
             .setRequired(true)
             .addChoices(
+              { name: "Seconds", value: "seconds" },
               { name: "Minutes", value: "minutes" },
               { name: "Hours", value: "hours" },
               { name: "Days", value: "days" },
@@ -41,7 +42,7 @@ module.exports = {
         .addStringOption((option) =>
           option
             .setName("reason")
-            .setDescription("The reason for muting the user.")
+            .setDescription("The reason for timing out the user.")
             .setRequired(true)
         )
   ),

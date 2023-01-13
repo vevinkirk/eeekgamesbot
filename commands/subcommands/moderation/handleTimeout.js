@@ -1,7 +1,7 @@
-const { PermissionFlagsBits, EmbedBuilder } = require("discord.js");
+const { PermissionFlagsBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const { calculateMilliseconds }  = require("../../../utils/calculateMiliseconds");
 
-const handleMute = async (interaction) => {
+const handleTimeout = async (interaction) => {
 
   function createErrEmbed(err) {
     return new EmbedBuilder()
@@ -22,9 +22,9 @@ const handleMute = async (interaction) => {
     const reason = options.getString("reason", true);
     const durationMilliseconds = calculateMilliseconds(duration, durationUnit);
 
-    const successEmbed = new EmbedBuilder()
-      .setTitle(":white_check_mark: Muted")
-      .setDescription(`${target} has been muted.`)
+    const proposedTimeoutEmbed = new EmbedBuilder()
+      .setTitle("Awaiting confirmation for timeout.")
+      .setDescription(`Should ${target} be timed out?`)
       .setColor(0x0099FF)
       .addFields({
         name: 'Reason',
@@ -89,7 +89,7 @@ const handleMute = async (interaction) => {
 
     if (target.id === member.user.id) {
       await interaction.editReply({
-        content: "You can't mute yourself!",
+        content: "You can't timeout yourself!",
       });
       return;
     }
@@ -102,10 +102,19 @@ const handleMute = async (interaction) => {
       return;
     }
 
-    await targetMember.timeout(durationMilliseconds, reason);
+    const row = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('timeout')
+          .setLabel('Confirm timout')
+          .setStyle(ButtonStyle.Success),
+    );
+
+    // await targetMember.timeout(durationMilliseconds, reason);
 
     await interaction.editReply({
-      embeds: [successEmbed]
+      embeds: [proposedTimeoutEmbed],
+      components: [row]
     });
   } catch (err) {
     console.log({err})
@@ -116,5 +125,5 @@ const handleMute = async (interaction) => {
 };
 
 module.exports = {
-  handleMute
+  handleTimeout
 }
