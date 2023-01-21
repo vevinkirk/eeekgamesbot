@@ -14,7 +14,7 @@ module.exports = {
     ),
   async execute(interaction) {
     await interaction.reply(
-      `${interaction.options.getUser("user")} I GOT A FUCKIN HOG ON ME!!!!`
+      `${interaction.options.getUser("user")} I GOT NO HOG ON ME!!!!`
     );
   },
 };

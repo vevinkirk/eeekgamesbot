@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, SlashCommandSubcommandBuilder } = require('discord.js');
-const { handleMute } = require("./subcommands/moderation/handleMute");
+const { handleTimeout } = require("./subcommands/moderation/handleTimeout");
 
 
 const handlers = {
-  mute: handleMute,
+  timeout: handleTimeout,
 };
 
 module.exports = {
@@ -12,18 +12,18 @@ module.exports = {
     .setDescription('Moderation commands')
     .addSubcommand(
       new SlashCommandSubcommandBuilder()
-        .setName("mute")
-        .setDescription("Mutes a user via your configured muted role.")
+        .setName("timeout")
+        .setDescription("Timeouts a user for x amount of time.")
         .addUserOption((option) =>
           option
             .setName("target")
-            .setDescription("The user to mute.")
+            .setDescription("The user to timeout.")
             .setRequired(true)
         )
         .addIntegerOption((option) =>
           option
             .setName("duration")
-            .setDescription("The length of time to mute the user.")
+            .setDescription("The length of time to timeout the user.")
             .setRequired(true)
         )
         .addStringOption((option) =>
