@@ -13,7 +13,7 @@ module.exports = {
     .addSubcommand(
       new SlashCommandSubcommandBuilder()
         .setName("timeout")
-        .setDescription("Timeouts a user via your configured timeoutd role.")
+        .setDescription("Timeouts a user for x amount of time.")
         .addUserOption((option) =>
           option
             .setName("target")
