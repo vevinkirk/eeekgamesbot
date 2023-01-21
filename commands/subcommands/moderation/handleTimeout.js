@@ -1,7 +1,7 @@
 const { PermissionFlagsBits, EmbedBuilder } = require("discord.js");
 const { calculateMilliseconds }  = require("../../../utils/calculateMiliseconds");
 
-const handleMute = async (interaction) => {
+const handleTimeout = async (interaction) => {
 
   function createErrEmbed(err) {
     return new EmbedBuilder()
@@ -23,8 +23,8 @@ const handleMute = async (interaction) => {
     const durationMilliseconds = calculateMilliseconds(duration, durationUnit);
 
     const successEmbed = new EmbedBuilder()
-      .setTitle(":white_check_mark: Muted")
-      .setDescription(`${target} has been muted.`)
+      .setTitle(":white_check_mark: Timeout")
+      .setDescription(`${target} has been Timed out.`)
       .setColor(0x0099FF)
       .addFields({
         name: 'Reason',
@@ -89,7 +89,7 @@ const handleMute = async (interaction) => {
 
     if (target.id === member.user.id) {
       await interaction.editReply({
-        content: "You can't mute yourself!",
+        content: "You can't timeout yourself!",
       });
       return;
     }
@@ -97,7 +97,7 @@ const handleMute = async (interaction) => {
     // Bot ID
     if (target.id === 948683359549292544) {
       await interaction.editReply({
-        content: "You can't mute me!",
+        content: "You can't timeout me!",
       });
       return;
     }
@@ -116,5 +116,5 @@ const handleMute = async (interaction) => {
 };
 
 module.exports = {
-  handleMute
+  handleTimeout
 }
