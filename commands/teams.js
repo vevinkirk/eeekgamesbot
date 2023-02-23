@@ -17,7 +17,7 @@ function createTeamsEmbed(gamerArray, rerolledBy) {
 
 async function generateTeams(interaction, rerolledBy) {
   const channel = interaction.member.voice.channel;
-  let excudeArr = []
+  let excludeArr = []
   if(!rerolledBy) {
     excludeArr = [
       interaction.options.getUser("excluded1") ? interaction.options.getUser("excluded1").username : null, 
