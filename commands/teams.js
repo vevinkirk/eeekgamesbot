@@ -30,8 +30,8 @@ async function generateTeams(interaction, rerolledBy) {
   if(!channel) {
     await interaction.reply("You must be in a voice chat to create teams.")
   } else {
-    // let membersInVoiceChannel = [];
-    let membersInVoiceChannel = ['one','two','three','four','five','six'];
+    let membersInVoiceChannel = [];
+    // let membersInVoiceChannel = ['one','two','three','four','five','six'];
     channel.members.forEach(({ user }) => {
       if(!excudeArr.includes(user.username)) {
         membersInVoiceChannel.push(user.username)
