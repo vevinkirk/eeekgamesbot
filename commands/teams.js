@@ -19,7 +19,7 @@ async function generateTeams(interaction, rerolledBy) {
   const channel = interaction.member.voice.channel;
   let excudeArr = []
   if(!rerolledBy) {
-    excudeArr = [
+    excludeArr = [
       interaction.options.getUser("excluded1") ? interaction.options.getUser("excluded1").username : null, 
       interaction.options.getUser("excluded2") ? interaction.options.getUser("excluded2").username : null, 
       interaction.options.getUser("excluded3") ? interaction.options.getUser("excluded3").username : null, 
