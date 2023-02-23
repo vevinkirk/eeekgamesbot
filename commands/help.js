@@ -12,7 +12,7 @@ const help = new EmbedBuilder()
   .addFields({
     name: "\u200B",
     value:
-      "`teams` - Create randomly generated teams. \n `mastery` - Bot will reply with the summoners top 3 champions. \n `milkman` - The milkman will fuck their wife. \n `version` - Shows current bot version and latest commit. \n `tarkov item` - Display tarkov item description, price, and average flea price over the last 24 hours. \n `hog` - Determine whether a user has a hog on them. \n",
+      "`teams` - Create randomly generated teams. \n `mastery` - Bot will reply with the summoners top 3 champions. \n `milkman` - The milkman will fuck their wife. \n  `cock` - Determine the size of a users `Chutzpah` \n`version` - Shows current bot version and latest commit. \n `tarkov item` - Display tarkov item description, price, and average flea price over the last 24 hours. \n `hog` - Determine whether a user has a hog on them. \n `mute` - Mute user for set duration. \n",
     inline: true,
   })
   .setImage(
