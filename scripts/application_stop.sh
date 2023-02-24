@@ -8,4 +8,5 @@ echo "Stopping any existing node server"
 } || { # catch
     # save log for exception
     echo "something went wrong"
+    echo "test pull"
 }
