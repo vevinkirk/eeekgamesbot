@@ -24,7 +24,7 @@ module.exports = {
       await interaction.reply(
         `${interaction.options.getUser(
           "user"
-        )} has a ton of privilege but not cock to be found.`
+        )} has a ton of privilege but no cock to be found.`
       );
     } else if (inch >= 5) {
       await interaction.reply(
