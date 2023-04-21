@@ -26,15 +26,15 @@ module.exports = {
           "user"
         )} has a ton of privilege but no cock to be found.`
       );
-    } else if (inch >= 5) {
-      await interaction.reply(
-        `${interaction.options.getUser("user")} GOT A ${inch} INCH HOG ON EM!!!`
-      );
     } else if (inch > 5 && inch <= 7) {
       await interaction.reply(
         `${interaction.options.getUser(
           "user"
         )} has a totally above average ${inch} inch cock on em`
+      );
+    } else if (inch >= 5) {
+      await interaction.reply(
+        `${interaction.options.getUser("user")} GOT A ${inch} INCH HOG ON EM!!!`
       );
     } else {
       `${interaction.options.getUser(
