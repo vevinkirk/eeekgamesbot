@@ -57,19 +57,19 @@ async function generateTeams(interaction, rerolledBy, existingMembers) {
   } else {
     let membersInVoiceChannel;
     if (!existingMembers) {
-      let membersInVoiceChannel = [];
-      //membersInVoiceChannel = [
+      membersInVoiceChannel = [];
+      // membersInVoiceChannel = [
       //  "one",
-       // "two",
-       // "three",
+      //  "two",
+      //  "three",
       //  "four",
-     //   "five",
-       // "six",
-       // "seven",
-       // "eight",
-       // "nine",
-       // "ten",
-      //];
+      //  "five",
+      //  "six",
+      //  "seven",
+      //  "eight",
+      //  "nine",
+      //  "ten",
+      // ];
       channel.members.forEach(({ user }) => {
         if (!excludeArr.includes(user.username)) {
           membersInVoiceChannel.push(user.username);
